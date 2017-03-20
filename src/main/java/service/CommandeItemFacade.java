@@ -5,6 +5,7 @@
  */
 package service;
 
+import bean.Commande;
 import bean.CommandeItem;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,5 +34,8 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
     { String requette="SELECT ci FROM CommandeItem ci WHERE ci.enregistre=0";
         return em.createQuery(requette).getResultList();
     }
-   
+   public List<CommandeItem> finditemsbycommande(Commande comm)
+    { String requette="SELECT ci FROM CommandeItem ci WHERE ci.commande.id="+comm.getId();
+        return em.createQuery(requette).getResultList();
+    }
 }

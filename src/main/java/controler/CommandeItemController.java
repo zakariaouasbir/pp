@@ -20,6 +20,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.CommandeFacade;
+import service.ProduitFacade;
 
 @Named("commandeItemController")
 @SessionScoped
@@ -33,12 +35,45 @@ public class CommandeItemController implements Serializable {
     private service.CommandeFacade ejbcommande;
     private List<CommandeItem> items ;
     private CommandeItem selected;
+    private Commande commandeselected;
 
     public CommandeItemController() {
     }
 
     public CommandeItem getSelected() {
         return selected;
+    }
+
+    public CommandeItemFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(CommandeItemFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public ProduitFacade getEjbproduit() {
+        return ejbproduit;
+    }
+
+    public void setEjbproduit(ProduitFacade ejbproduit) {
+        this.ejbproduit = ejbproduit;
+    }
+
+    public CommandeFacade getEjbcommande() {
+        return ejbcommande;
+    }
+
+    public void setEjbcommande(CommandeFacade ejbcommande) {
+        this.ejbcommande = ejbcommande;
+    }
+
+    public Commande getCommandeselected() {
+        return commandeselected;
+    }
+
+    public void setCommandeselected(Commande commandeselected) {
+        this.commandeselected = commandeselected;
     }
 
     public void setSelected(CommandeItem selected) {
@@ -185,4 +220,9 @@ public class CommandeItemController implements Serializable {
            ejbcommande.edit(c);
            items.clear();
        }
+       public void changeitems()
+      {
+          items=ejbFacade.finditemsbycommande(commandeselected);
+          
+      }
 }

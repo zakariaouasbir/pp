@@ -29,11 +29,11 @@
                      
             </h:form>
             <h:form id="grid">
-            <p:dataGrid  var="produit" value="#{datacontroler.produits}" columns="4" rows="4" paginator="true">
+            <p:dataGrid  var="produit" value="#{datacontroler.produits}" columns="3" rows="4" paginator="true">
    <p:column>
        <p:panel header="#{produit.nom}">
    <h:panelGrid columns="1">
-       <p:graphicImage style="height:100px;width: 100px" value="../images/#{produit.nom}.jpg"/>
+       <p:graphicImage style="height:100px;width: 100px" value="../images/#{produit.categorie}.jpg"/>
    <h:outputText value="Prix:#{produit.prix} dh/u" />
    <h:outputText value="Quantite:#{produit.qteg} " />
    </h:panelGrid>

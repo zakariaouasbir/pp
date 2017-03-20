@@ -14,9 +14,21 @@
                     <p:panelGrid columns="2" rendered="#{produitController.selected != null}">
                         <p:outputLabel value="#{bundle.EditProduitLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{produitController.selected.nom}" title="#{bundle.EditProduitTitle_nom}" />
-                        <p:outputLabel value="#{bundle.EditProduitLabel_categorie}" for="categorie" />
-                        <p:inputText id="categorie" value="#{produitController.selected.categorie}" title="#{bundle.EditProduitTitle_categorie}" />
-                        <p:outputLabel value="#{bundle.EditProduitLabel_qteg}" for="qteg" />
+                         <p:outputLabel value="departement" for="categorie" />
+                        <p:selectOneMenu id="categorie" value="#{produitController.selected.categorie}" >
+                            <f:selectItem itemLabel="chimie"
+                                           itemValue="chimie"/>
+                            <f:selectItem itemLabel="math"
+                                           itemValue="math"/>
+                            <f:selectItem itemLabel="physic"
+                                           itemValue="physic"/>
+                            <f:selectItem itemLabel="informatique"
+                                           itemValue="informatique"/>
+                             <f:selectItem itemLabel="biologie"
+                                           itemValue="biologie"/>
+
+ <f:selectItem itemLabel="geologie"
+                                           itemValue="geologie"/>                        </p:selectOneMenu><p:outputLabel value="#{bundle.EditProduitLabel_qteg}" for="qteg" />
                         <p:inputText id="qteg" value="#{produitController.selected.qteg}" title="#{bundle.EditProduitTitle_qteg}" />
                         <p:outputLabel value="#{bundle.EditProduitLabel_prix}" for="prix" />
                         <p:inputText id="prix" value="#{produitController.selected.prix}" title="#{bundle.EditProduitTitle_prix}" />

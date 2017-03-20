@@ -14,9 +14,21 @@
                     <p:panelGrid columns="2" rendered="#{produitController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateProduitLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{produitController.selected.nom}" title="#{bundle.CreateProduitTitle_nom}" />
-                        <p:outputLabel value="#{bundle.CreateProduitLabel_categorie}" for="categorie" />
-                        <p:inputText id="categorie" value="#{produitController.selected.categorie}" title="#{bundle.CreateProduitTitle_categorie}" />
+                         <p:outputLabel value="departement" for="categorie" />
+                        <p:selectOneMenu id="categorie" value="#{produitController.selected.categorie}" >
+                            <f:selectItem itemLabel="chimie"
+                                           itemValue="chimie"/>
+                            <f:selectItem itemLabel="math"
+                                           itemValue="math"/>
+                            <f:selectItem itemLabel="physic"
+                                           itemValue="physic"/>
+                            <f:selectItem itemLabel="informatique"
+                                           itemValue="informatique"/>
+                             <f:selectItem itemLabel="biologie"
+                                           itemValue="biologie"/>
 
+ <f:selectItem itemLabel="geologie"
+                                           itemValue="geologie"/>                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateProduitLabel_prix}" for="prix" />
                         <p:inputText id="prix" value="#{produitController.selected.prix}" title="#{bundle.CreateProduitTitle_prix}" />
 <!--                                               <p:outputLabel value="#{bundle.CreateProduitLabel_qteg}" for="qteg" />
