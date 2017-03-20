@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLivraisonTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="LivraisonSearchForm">
+                      <p:panelGrid columns="6" >
+                   
+                                <p:outputLabel value="date Maximale" for="datemax" />
+                                <p:calendar id="datemax" pattern="MM/dd/yyyy" value="#{livraisonController.datemax}" title="#{bundle.EditLivraisonTitle_date}"  showOn="button"/>
+                        <p:outputLabel value="date Minimale" for="datemin" />
+                        <p:calendar id="datemin" pattern="MM/dd/yyyy" value="#{livraisonController.datemin}" title="#{bundle.EditLivraisonTitle_date}"  showOn="button"/>
+                         <p:outputLabel value="Commande id"  for="commande" />
+                         <p:selectOneMenu id="commande" value="#{livraisonController.commande}" >
+                                 <f:selectItem value="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                                 <f:selectItems value="#{commandeController.itemsAvailableSelectOne}"
+                                           var="commandeItem" 
+                                           itemValue="#{commandeItem}" /> 
+                             </p:selectOneMenu>  
+                         <p:commandButton actionListener="#{livraisonController.Search()}" value="Search" update="datalist" />
+                   
+                            </p:panelGrid>
+                       <p:panel header="Resultat de recherche">
+                    <p:dataTable id="datalist" value="#{livraisonController.items}" var="item"
+                                 selectionMode="single" selection="#{livraisonController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+<p:ajax event="rowSelect"   update=" viewButton "/>
+                        <p:ajax event="rowUnselect" update=" viewButton "/>
+ 
+              
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date de Livraison"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datelivraison}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivraisonTitle_commande}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.commande}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivraisonTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                           </f:facet>
+                         <f:facet name="footer">
+                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LivraisonViewForm" oncomplete="PF('LivraisonViewDialog').show()" disabled="#{empty livraisonController.selected}"/>
+                                 <p:commandButton id="refrechbutton" actionListener="#{livraisonController.refrech()}" icon="ui-icon-plus"   value="refrech"  update="datalist" />
+                           
+                         </f:facet>
+                  
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+  
+              
+              <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

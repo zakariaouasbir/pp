@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventaireEditDlg" widgetVar="InventaireEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInventaireTitle}">
+            <h:form id="InventaireEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inventaireController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInventaireLabel_dateInvent}" for="dateInvent" />
+                        <p:calendar id="dateInvent" pattern="MM/dd/yyyy" value="#{inventaireController.selected.dateInvent}" title="#{bundle.EditInventaireTitle_dateInvent}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInventaireLabel_magasin}" for="magasin" />
+                        <p:selectOneMenu id="magasin" value="#{inventaireController.selected.magasin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
+                                           var="magasinItem"
+                                           itemValue="#{magasinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditInventaireLabel_stock}" for="stock" />
+                        <p:selectOneMenu id="stock" value="#{inventaireController.selected.stock}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{stockController.itemsAvailableSelectOne}"
+                                           var="stockItem"
+                                           itemValue="#{stockItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditInventaireLabel_descri}" for="descri" />
+                        <p:inputText id="descri" value="#{inventaireController.selected.descri}" title="#{bundle.EditInventaireTitle_descri}" />
+                        <p:outputLabel value="#{bundle.EditInventaireLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{inventaireController.selected.id}" title="#{bundle.EditInventaireTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inventaireController.update}" value="#{bundle.Save}" update="display,:InventaireListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InventaireEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InventaireEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

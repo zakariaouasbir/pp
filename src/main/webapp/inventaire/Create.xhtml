@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventaireCreateDlg" widgetVar="InventaireCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInventaireTitle}">
+            <h:form id="InventaireCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inventaireController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInventaireLabel_dateInvent}" for="dateInvent" />
+                        <p:calendar id="dateInvent" pattern="MM/dd/yyyy" value="#{inventaireController.selected.dateInvent}" title="#{bundle.EditInventaireTitle_dateInvent}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInventaireLabel_magasin}" for="magasin" />
+                        <p:selectOneMenu id="magasin" value="#{inventaireController.selected.magasin}" >
+                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
+                                           var="magasinItem"
+                                           itemValue="#{magasinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventaireLabel_stock}" for="stock" />
+                        <p:selectOneMenu id="stock" value="#{inventaireController.selected.stock}" >
+                            <f:selectItems value="#{stockController.itemsAvailableSelectOne}"
+                                           var="stockItem"
+                                           itemValue="#{stockItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventaireLabel_descri}" for="descri" />
+                        <p:inputText id="descri" value="#{inventaireController.selected.descri}" title="#{bundle.CreateInventaireTitle_descri}" />
+                        <p:outputLabel value="#{bundle.CreateInventaireLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{inventaireController.selected.id}" title="#{bundle.CreateInventaireTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inventaireController.create}" value="#{bundle.Save}" update="display,:InventaireListForm:datalist,:growl" oncomplete="handleSubmit(args,'InventaireCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InventaireCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+            
+        </p:dialog>
+        <p:dialog id="InventaireItemCreateDlg" widgetVar="InventaireItemCreateDialog" dynamic="true" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInventaireItemTitle}">
+            <h:form id="InventaireItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inventaireItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInventaireItemLabel_inventaire}" for="inventaire" />
+                        <p:selectOneMenu id="inventaire" value="#{inventaireItemController.selected.inventaire}" >
+                            <f:selectItems value="#{inventaireController.itemsAvailableSelectOne}"
+                                           var="inventaireItem"
+                                           itemValue="#{inventaireItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventaireItemLabel_dateINvent}" for="dateINvent" />
+                        <p:calendar id="dateINvent" pattern="MM/dd/yyyy" value="#{inventaireItemController.selected.dateINvent}" title="#{bundle.EditInventaireItemTitle_dateINvent}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInventaireItemLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{inventaireItemController.selected.etat}" title="#{bundle.CreateInventaireItemTitle_etat}" />
+                        <p:outputLabel value="#{bundle.CreateInventaireItemLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{inventaireItemController.selected.produit}" >
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventaireItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{inventaireItemController.selected.id}" title="#{bundle.CreateInventaireItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inventaireItemController.create}" value="#{bundle.Save}" update=":InventaireListForm" oncomplete="handleSubmit(args,'InventaireItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InventaireItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
