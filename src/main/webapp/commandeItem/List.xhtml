@@ -20,8 +20,8 @@
                                  selectionMode="single" selection="#{commandeItemController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,40,50"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommandeItemTitle_produit}"/>
                             </f:facet>
-                            <h:outputText value="#{item.produit}"/>
+                            <h:outputText value="#{item.produit.nom}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -53,9 +53,10 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommandeItemTitle_id}"/>
+                                  <h:outputText value="Action"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <p:commandButton action="#{mail.}" icon="ui-icon-mail-closed" />
+                            <p:commandButton action="{mail}" icon="ui-icon-arrowthickstop-1-s" />
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{commandeItemController.prepareCreate}" update=":CommandeItemCreateForm" oncomplete="PF('CommandeItemCreateDialog').show()"/>
@@ -68,7 +69,7 @@
             </h:form>
 
             <ui:include src="Create.xhtml"/>
-             <ui:include src="Create_2.xhtml"/>
+<!--             <ui:include src="Create_2.xhtml"/>-->
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

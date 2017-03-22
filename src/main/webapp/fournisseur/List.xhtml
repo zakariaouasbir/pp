@@ -41,12 +41,13 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFournisseurTitle_id}"/>
+                                <h:outputText value="Actions"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <p:commandButton oncomplete="PF('MailDialog').show()" icon="ui-icon-mail-closed" style="color: yellow"/>
+                           
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fournisseurController.prepareCreate}" update=":FournisseurCreateForm" oncomplete="PF('FournisseurCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fournisseurController.prepareCreate}" update=":FournisseurCreateForm" oncomplete="PF('FournisseurCreateDialog').show()" />
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FournisseurViewForm" oncomplete="PF('FournisseurViewDialog').show()" disabled="#{empty fournisseurController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FournisseurEditForm" oncomplete="PF('FournisseurEditDialog').show()" disabled="#{empty fournisseurController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{fournisseurController.destroy}" update=":growl,datalist" disabled="#{empty fournisseurController.selected}"/>
@@ -58,6 +59,7 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
+             <ui:include src="Mail.xhtml"/>
         </ui:define>
     </ui:composition>
 
