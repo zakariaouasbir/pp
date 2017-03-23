@@ -24,21 +24,22 @@ public class Email implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String from;
-    private String to;
+    private String sender ;
+    private String recipient;
     private String subject;
     private String text;
-    @Temporal(javax.persistence.TemporalType.TIME)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date datesend;
 
-    public Email(String from, String to, String subject, String text, Date datesend) {
-       
-        this.from = from;
-        this.to = to;
+    public Email(String sender, String recipient, String subject, String text, Date datesend) {
+        this.sender = sender;
+        this.recipient = recipient;
         this.subject = subject;
         this.text = text;
         this.datesend = datesend;
     }
+
+   
 
     public Email() {
     }
@@ -52,20 +53,20 @@ public class Email implements Serializable {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getSender() {
+        return sender;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getTo() {
-        return to;
+    public String getRecipient() {
+        return recipient;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 
     public String getSubject() {

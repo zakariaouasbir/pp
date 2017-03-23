@@ -30,11 +30,11 @@ import org.primefaces.model.ScheduleModel;
 public class ScheduleView implements Serializable {
  
     private ScheduleModel eventModel;
-     
-    private ScheduleModel lazyEventModel;
+
+  
  
     private ScheduleEvent event = new DefaultScheduleEvent();
- 
+
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
@@ -43,17 +43,9 @@ public class ScheduleView implements Serializable {
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
          
-        lazyEventModel = new LazyScheduleModel() {
+       
              
-            @Override
-            public void loadEvents(Date start, Date end) {
-                Date random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-                 
-                random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
-            }   
-        };
+           
     }
      
     public Date getRandomDate(Date base) {
@@ -75,9 +67,7 @@ public class ScheduleView implements Serializable {
         return eventModel;
     }
      
-    public ScheduleModel getLazyEventModel() {
-        return lazyEventModel;
-    }
+    
  
     private Calendar today() {
         Calendar calendar = Calendar.getInstance();
@@ -166,7 +156,8 @@ public class ScheduleView implements Serializable {
      
     public void addEvent(ActionEvent actionEvent) {
         if(event.getId() == null)
-            eventModel.addEvent(event);
+        eventModel.addEvent(event);
+        
         else
             eventModel.updateEvent(event);
          
